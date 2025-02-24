@@ -7,7 +7,7 @@ const SignOutButton = () => {
   return (
     <button
     onClick={() => signOut()}
-    className="bg-gray-600 text-white p-2 rounded mt-2"
+    className="bg-white text-black hover:bg-gray-200 p-2 rounded mt-2"
   >
     Sign out
   </button>
