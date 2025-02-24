@@ -76,74 +76,6 @@ write:
 
 Setup authentication method
 
-  
-# NextAuth Integration with Next.js
-
-This project demonstrates how to integrate NextAuth for authentication (using GitHub as an example) in a Next.js application. It includes a Navbar component that displays the user’s session status and provides sign in/sign out functionality.
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-
-
-## Overview
-
-This guide explains how to:
-
-- Configure NextAuth for GitHub authentication.
-- Separate client-side functions (like `signIn` and `signOut`) from server components.
-- Build a responsive Navbar component that shows a welcome message for logged in users or a GitHub sign in button for guests.
-
-## Prerequisites
-
-- [Node.js](https://nodejs.org/) (v14 or later)
-- [Next.js](https://nextjs.org/) (v13 recommended for app directory features)
-- A GitHub account (for GitHub authentication)
-- Basic knowledge of React and Next.js
-
-## Installation
-
-
-## Step 1
-
-Run the installation command:
-
-- You can find the installation command from the official site [visit](https://authjs.dev/reference/nextjs)
-
-
-## Step 2
-
-Setup environment 
-
-- Directly in the root of your application, create 'auth.ts'
-
-write: 
-
-    
-    import NextAuth from "next-auth"
-    import GitHub from "next-auth/providers/github"
-    export const { handlers, auth } = NextAuth({ providers: [ GitHub ] })
-
-Here we're exporting the NextAuth object with the complete configuration.
-
-## Step 3
-
-We have to add a route handeler under [./app/api/auth/[...nextauth]/route.ts]()
-
-
-
-write: 
-
-     
-    import { handlers } from "@/auth"
-    export const { GET, POST } = handlers
-
-## Step 4
-
-Setup authentication method
-
 - Go to Github -> click on your account -> 'Settings' -> 'Developer options' -> click 'OAuth App' 
 
 - Set Application name [Your required App name]
@@ -207,3 +139,44 @@ Write:
 
 - Create another component where your Sign in and Sign Out buttons will be there.
 - Make those components are client component by using ["use client"]()
+
+
+The Sign in button will look like this:
+
+[components/SignInButton.tsx]()
+
+    "use client";
+
+    import { signIn } from "next-auth/react";
+
+    export default function SignInButton() {
+    return (
+    <button
+      onClick={() => signIn('github')}
+      className="bg-gray-600 text-white p-2 rounded mt-2"
+    >
+      GitHub Login
+    </button>
+    );
+    }
+
+  The Sign Out button will look like this:
+
+  [components/SignInButton.tsx]()
+
+    "use client"
+    import { signOut } from 'next-auth/react'
+
+    import React from 'react'
+
+    const SignOutButton = () => {
+    return (
+    <button onClick={() => signOut()}
+    className="bg-gray-600 text-white p-2 rounded mt-2">
+    Sign out
+    </button>
+    )}
+
+    export default SignOutButton
+
+# Now you're ready to Log in, verify and check
